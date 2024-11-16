@@ -27,19 +27,24 @@
         <div class="sidebar">
             <h3>Aktif Yayınlar</h3>
             <ul>
-                <li><button onclick="changeBroadcast('Türkçe UFC 309', 'https://steamcommunity.com/broadcast/watch/76561198860535410')">Türkçe UFC 309</button></li>
-                <li><button onclick="changeBroadcast('English UFC 309', 'https://thedaddy.to/embed/stream-76.php')">English UFC 309</button></li>
+                <li>
+                    <button onclick="changeBroadcast('Türkçe UFC 309', 'turkishUFC')">Türkçe UFC 309 <span class="start-time">(6:00 AM GMT+3)</span></button>
+                </li>
+                <li>
+                    <button onclick="changeBroadcast('English UFC 309', 'englishUFC')">English UFC 309 <span class="start-time">(2:00 AM GMT+3)</span></button>
+                </li>
             </ul>
         </div>
 
         <!-- Main Content: Video Embed -->
         <div class="main-content">
             <iframe id="video-player" 
-                    src="https://steamcommunity.com/broadcast/watch/76561198860535410" 
+                    src="" 
                     width="100%" 
-                    style="aspect-ratio: 16/9; min-height: 340px;" 
+                    style="aspect-ratio: 16/9; min-height: 340px; display: none;" 
                     frameborder="0" 
                     scrolling="no" 
+                    allow="autoplay" 
                     allowfullscreen 
                     webkitallowfullscreen 
                     mozallowfullscreen 
@@ -47,8 +52,14 @@
                     msallowfullscreen>
             </iframe>
             <p id="broadcast-name">Türkçe UFC 309</p>
+            <p id="countdown-text">Geri sayım: <span id="timer"></span></p>
         </div>
     </div>
+
+    <!-- Device Time -->
+    <footer>
+        <p>Device Time: <span id="device-time"></span></p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
