@@ -13,11 +13,30 @@ const broadcasts = {
 // Global interval değişkeni, geri sayımı temizlemek için
 let countdownInterval = null;
 
+// Cihazın yerel saatine dönüştürülmüş saatleri güncelleme fonksiyonu
+function updateButtonTimes() {
+    const buttons = document.querySelectorAll('.sidebar ul li button');
+
+    buttons.forEach(button => {
+        const startTimeKey = button.id;
+        if (startTimeKey) {
+            const { startTimeUTC } = broadcasts[startTimeKey];
+            const localTime = new Date(startTimeUTC).toLocaleString('en-US', { 
+                timeZoneName: 'short', 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                hour12: true 
+            });
+
+            button.querySelector('.start-time').textContent = `(${localTime})`;
+        }
+    });
+}
+
 // Geri sayım fonksiyonu
 function startCountdown(broadcastKey) {
     const { startTimeUTC, iframeSrc } = broadcasts[broadcastKey];
     const countdownTimer = document.getElementById('timer');
-    const videoPlayer = document.getElementById('video-player');
     const countdownText = document.getElementById('countdown-text');
     const videoPlayerElement = document.getElementById('video-player');
 
@@ -73,4 +92,5 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDeviceTime();
     setInterval(updateDeviceTime, 1000); // Cihaz saatini her saniye güncelle
     startCountdown('turkishUFC'); // Varsayılan olarak Türkçe UFC başlama saati
+    updateButtonTimes(); // Butonlardaki saatleri yerel saatte göster
 });
