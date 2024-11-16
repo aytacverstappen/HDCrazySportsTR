@@ -55,20 +55,6 @@ header nav ul li a:hover {
     border-radius: 3px;
 }
 
-header nav ul li a.disabled-link {
-    color: white;
-    font-size: 1rem;
-    padding: 5px 10px;
-    text-decoration: none;
-    cursor: not-allowed; /* Shows a not-allowed cursor */
-    pointer-events: none; /* Disables clicking */
-    opacity: 0.6; /* Optional: make them appear disabled */
-}
-
-header nav ul li a.disabled-link:hover {
-    background-color: transparent; /* Disable hover effect */
-}
-
 /* Main Container for Layout */
 .container {
     display: flex;
@@ -125,6 +111,11 @@ header nav ul li a.disabled-link:hover {
     cursor: not-allowed;
 }
 
+.sidebar ul li button .start-time {
+    font-size: 0.8rem;
+    margin-left: 10px;
+}
+
 /* Main Content Styling */
 .main-content {
     width: 70%; /* Main content occupies 70% of the width */
@@ -142,99 +133,23 @@ header nav ul li a.disabled-link:hover {
     text-align: center;
 }
 
-iframe.video {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    min-height: 340px;
-    border: 2px solid #444;
+/* Countdown Styling */
+#countdown-text {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
 }
 
-/* Responsive Styles for Mobile Devices */
-@media (max-width: 768px) {
-    /* Hide Formula 1 and UFC links in the header */
-    header nav ul li a.disabled-link {
-        display: none;
-    }
-
-    /* Adjust layout for mobile */
-    .container {
-        flex-direction: column; /* Stack the sidebar and content vertically */
-    }
-
-    /* Make the sidebar buttons stack vertically below the video player */
-    .sidebar ul {
-        order: 2; /* Moves the sidebar buttons below the video */
-    }
-
-    /* Video player responsive */
-    .main-content iframe {
-        width: 100%;
-        height: auto;
-        min-height: 250px; /* Make sure the video has a minimum height */
-    }
-
-    /* Align content to the center */
-    .main-content {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    /* Buttons should be centered and fill width */
-    .sidebar ul {
-        display: flex;
-        justify-content: center;
-        gap: 10px; /* Space between buttons */
-        width: 100%;
-        padding: 0;
-    }
-
-    /* Style for individual buttons inside the sidebar */
-    .sidebar ul li {
-        width: auto; /* Buttons should only take up as much width as necessary */
-    }
-
-    .sidebar ul li button {
-        width: 100%; /* Buttons fill up width */
-        font-size: 1rem;
-        text-align: center;
-        padding: 15px;
-    }
-
-    .sidebar ul li button:hover {
-        background-color: #666; /* Lighter Gray on Hover */
-    }
-
-    /* Make sure buttons are in a single line (horizontal) */
-    .sidebar ul {
-        flex-direction: row;
-        flex-wrap: wrap;
-    }
+#timer {
+    font-weight: bold;
+    font-size: 2rem;
+    color: white;
 }
 
-/* Desktop-Specific Styles */
-@media (min-width: 769px) {
-    .container {
-        display: flex;
-        height: calc(100vh - 70px); /* Subtract header height */
-    }
-
-    .sidebar {
-        width: 30%; /* Sidebar occupies 30% of the width */
-    }
-
-    .main-content {
-        width: 70%; /* Main content occupies 70% of the width */
-    }
-
-    iframe {
-        min-height: 340px; /* Keep consistent height for video */
-    }
-
-    .sidebar ul li button {
-        width: 100%; /* Keep the button width consistent */
-    }
+/* Device Time Styling */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    color: white;
 }
