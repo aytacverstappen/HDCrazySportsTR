@@ -1,92 +1,53 @@
-// Başlama saatlerini UTC olarak tanımla
+// Yayın bilgileri
 const broadcasts = {
-    turkishUFC: {
-        startTimeUTC: new Date('2024-11-17T03:00:00Z'), // Türkçe UFC 309
+    turkishMotoGP: {
         iframeSrc: 'https://steamcommunity.com/broadcast/watch/76561198860535410',
     },
-    englishUFC: {
-        startTimeUTC: new Date('2024-11-16T23:00:00Z'), // English UFC 309
-        iframeSrc: 'https://steamcommunity.com/broadcast/watch/76561198860535410',
+    englishMotoGP: {
+        iframeSrc: 'https://mazespin.live/channel/stream?id=tnt2&server=patis',
+    },
+    spanishMotoGP: {
+        iframeSrc: 'https://mazespin.live/channel/stream?id=dazn1es&server=patis',
     },
 };
 
-// Global interval değişkeni, geri sayımı temizlemek için
-let countdownInterval = null;
-
-// Cihazın yerel saatine dönüştürülmüş saatleri güncelleme fonksiyonu
-function updateButtonTimes() {
-    const buttons = document.querySelectorAll('.sidebar ul li button');
-
-    buttons.forEach(button => {
-        const startTimeKey = button.id;
-        if (startTimeKey) {
-            const { startTimeUTC } = broadcasts[startTimeKey];
-            const localTime = new Date(startTimeUTC).toLocaleString('en-US', { 
-                timeZoneName: 'short', 
-                hour: '2-digit', 
-                minute: '2-digit', 
-                hour12: true 
-            });
-
-            button.querySelector('.start-time').textContent = `(${localTime})`;
-        }
-    });
-}
-
-// Geri sayım fonksiyonu
-function startCountdown(broadcastKey) {
-    const { startTimeUTC, iframeSrc } = broadcasts[broadcastKey];
-    const countdownTimer = document.getElementById('timer');
-    const countdownText = document.getElementById('countdown-text');
-    const videoPlayerElement = document.getElementById('video-player');
-    
-    // Aktif buton rengi değişikliği
-    const buttons = document.querySelectorAll('.sidebar ul li button');
-    buttons.forEach(button => {
-        button.classList.remove('active');
-    });
-
-    const activeButton = document.getElementById(broadcastKey);
-    if (activeButton) {
-        activeButton.classList.add('active');
-    }
-
-    // Eğer önceki geri sayımı temizlemediysek, onu temizleyelim
-    if (countdownInterval) {
-        clearInterval(countdownInterval);
-    }
-
-    // Geri sayımı güncelle
-    function updateCountdown() {
-        const now = new Date();
-        const timeDifference = startTimeUTC - now;
-
-        if (timeDifference > 0) {
-            const hours = Math.floor((timeDifference / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((timeDifference / (1000 * 60)) % 60);
-            const seconds = Math.floor((timeDifference / 1000) % 60);
-
-            countdownTimer.textContent = `${hours.toString().padStart(2, '0')}:${minutes
-                .toString()
-                .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        } else {
-            clearInterval(countdownInterval);
-            countdownText.style.display = 'none';
-            videoPlayerElement.style.display = 'block'; // Videoyu göster
-            videoPlayerElement.src = iframeSrc;
-        }
-    }
-
-    updateCountdown(); // İlk güncelleme
-    countdownInterval = setInterval(updateCountdown, 1000); // Yeni geri sayım başlat
-}
-
-// Yayın seçildiğinde geri sayım başlat
+// Yayın değiştir ve sayfayı kaydır
 function changeBroadcast(broadcastName, broadcastKey) {
     const broadcastNameElement = document.getElementById('broadcast-name');
-    broadcastNameElement.textContent = broadcastName;
+    const videoPlayerElement = document.getElementById('video-player');
 
-    startCountdown(broadcastKey); // Seçilen yayının geri sayımını başlat
+    broadcastNameElement.textContent = broadcastName;
+    videoPlayerElement.style.display = 'block';
+    videoPlayerElement.src = broadcasts[broadcastKey].iframeSrc;
+
+    // İngilizce yayın için unmute işlemi
+    if (broadcastKey === 'englishMotoGP') {
+        setTimeout(() => handleEnglishStream(), 3000); // 3 saniye bekleme
+    }
+
+    // İframe alanına kaydır
+    videoPlayerElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// İngilizce yayın için unmute işlemi
+function handleEnglishStream() {
+    const iframe = document.getElementById('video-player');
+    const iframeWindow = iframe.contentWindow;
+
+    try {
+        const unmuteButton = iframeWindow.document.querySelector('.unmute-button-class'); // Unmute butonu class'ı
+        if (unmuteButton) {
+            unmuteButton.click();
+
+            // Pop-up sekmesini kapat
+            const popup = iframeWindow.open('', '_blank');
+            if (popup) {
+                popup.close();
+            }
+        }
+    } catch (error) {
+        console.error("Unmute işlemi başarısız:", error);
+    }
 }
 
 // Cihaz saatini güncelle
@@ -101,7 +62,6 @@ function updateDeviceTime() {
 // Sayfa yüklendiğinde ayarları başlat
 document.addEventListener('DOMContentLoaded', () => {
     updateDeviceTime();
-    setInterval(updateDeviceTime, 1000); // Cihaz saatini her saniye güncelle
-    startCountdown('turkishUFC'); // Varsayılan olarak Türkçe UFC başlama saati
-    updateButtonTimes(); // Butonlardaki saatleri yerel saatte göster
+    setInterval(updateDeviceTime, 1000);
+    changeBroadcast('Türkçe MotoGP', 'turkishMotoGP'); // Varsayılan olarak Türkçe MotoGP yayını başlat
 });
