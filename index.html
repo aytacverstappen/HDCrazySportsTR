@@ -14,8 +14,6 @@
             <nav>
                 <ul>
                     <li><a href="#">Ana Sayfa</a></li>
-                    <li><a href="#" class="disabled-link">Formula 1</a></li>
-                    <li><a href="#" class="disabled-link">UFC</a></li>
                 </ul>
             </nav>
         </div>
@@ -23,29 +21,11 @@
 
     <!-- Main Content Section -->
     <div class="container">
-        <!-- Left Sidebar -->
-        <div class="sidebar">
-            <h3>Aktif Yayınlar</h3>
-            <ul>
-                <li>
-                    <button id="turkishUFC" onclick="changeBroadcast('Türkçe UFC 309', 'turkishUFC')">
-                        Türkçe UFC 309 <span class="start-time">(Saat Bekleniyor)</span>
-                    </button>
-                </li>
-                <li>
-                    <button id="englishUFC" onclick="changeBroadcast('English UFC 309 With Prelims', 'englishUFC')">
-                        English UFC 309 With Prelims <span class="start-time">(Saat Bekleniyor)</span>
-                    </button>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Main Content: Video Embed -->
         <div class="main-content">
             <iframe id="video-player" 
                     src="" 
-                    width="100%" 
-                    style="aspect-ratio: 16/9; min-height: 340px; display: none;" 
+                    width="85%" 
+                    style="aspect-ratio: 16/9; min-height: 420px; display: none; margin-bottom: 10px;" 
                     frameborder="0" 
                     scrolling="no" 
                     allow="autoplay" 
@@ -55,14 +35,22 @@
                     oallowfullscreen 
                     msallowfullscreen>
             </iframe>
-            <p id="broadcast-name">Türkçe UFC 309</p>
-            <p id="countdown-text">Geri sayım: <span id="timer"></span></p>
+            <p id="broadcast-name">Türkçe MotoGP</p>
+            <!-- Broadcast Buttons -->
+            <div class="broadcast-buttons">
+                <button id="turkishMotoGP" onclick="changeBroadcast('Türkçe MotoGP', 'turkishMotoGP')">Türkçe MotoGP (16:00)</button>
+                <button id="englishMotoGP" onclick="changeBroadcast('English MotoGP', 'englishMotoGP')">English MotoGP (16:00)</button>
+                <button id="spanishMotoGP" onclick="changeBroadcast('Español MotoGP', 'spanishMotoGP')">Español MotoGP (16:00)</button>
+            </div>
         </div>
     </div>
 
-    <!-- Device Time -->
+    <!-- Footer Section -->
     <footer>
         <p>Device Time: <span id="device-time"></span></p>
+        <p style="color: #ffcc00; font-size: 1rem; margin-top: 10px;">
+            Eğer yayın seçme tuşlarına tıkladığınızda yayın değişmiyorsa, siteyi yenileyip yeniden yayın seçin.
+        </p>
     </footer>
 
     <script src="script.js"></script>
