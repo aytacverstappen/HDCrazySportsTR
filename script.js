@@ -6,7 +6,7 @@ const broadcasts = {
     },
     englishUFC: {
         startTimeUTC: new Date('2024-11-16T23:00:00Z'), // English UFC 309
-        iframeSrc: 'https://thedaddy.to/embed/stream-76.php',
+        iframeSrc: 'https://steamcommunity.com/broadcast/watch/76561198860535410',
     },
 };
 
@@ -39,6 +39,17 @@ function startCountdown(broadcastKey) {
     const countdownTimer = document.getElementById('timer');
     const countdownText = document.getElementById('countdown-text');
     const videoPlayerElement = document.getElementById('video-player');
+    
+    // Aktif buton rengi değişikliği
+    const buttons = document.querySelectorAll('.sidebar ul li button');
+    buttons.forEach(button => {
+        button.classList.remove('active');
+    });
+
+    const activeButton = document.getElementById(broadcastKey);
+    if (activeButton) {
+        activeButton.classList.add('active');
+    }
 
     // Eğer önceki geri sayımı temizlemediysek, onu temizleyelim
     if (countdownInterval) {
