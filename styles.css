@@ -38,10 +38,6 @@ header nav ul {
     gap: 15px;
 }
 
-header nav ul li {
-    display: inline;
-}
-
 header nav ul li a {
     text-decoration: none;
     color: white;
@@ -51,105 +47,60 @@ header nav ul li a {
 }
 
 header nav ul li a:hover {
-    background-color: #555; /* Slightly lighter background on hover */
+    background-color: #555;
     border-radius: 3px;
 }
 
-/* Main Container for Layout */
-.container {
-    display: flex;
-    height: calc(100vh - 70px); /* Subtract header height */
-}
-
-/* Sidebar Styling */
-.sidebar {
-    width: 30%; /* Sidebar occupies 30% of the width */
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.sidebar h3 {
-    text-align: center;
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.sidebar ul li {
-    display: flex;
-    justify-content: center;
-}
-
-.sidebar ul li button {
-    width: 100%;
-    padding: 15px;
-    border: none;
-    border-radius: 5px;
-    background-color: #444; /* Dark Gray Buttons */
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-}
-
-.sidebar ul li button:hover {
-    background-color: #666; /* Lighter Gray on Hover */
-}
-
-.sidebar ul li button:disabled {
-    background-color: #888; /* Gray for Disabled Buttons */
-    cursor: not-allowed;
-}
-
-.sidebar ul li button .start-time {
-    font-size: 0.8rem;
-    margin-left: 10px;
-}
-
 /* Main Content Styling */
-.main-content {
-    width: 70%; /* Main content occupies 70% of the width */
+.container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    gap: 15px;
+    padding: 15px;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 10px;
 }
 
-.main-content p {
-    font-size: 1.2rem;
-    margin-top: 10px;
-    color: #fff; /* White text */
+#broadcast-name {
+    font-size: 1.4rem;
     text-align: center;
-}
-
-/* Countdown Styling */
-#countdown-text {
-    font-size: 1.5rem;
     color: white;
-    text-align: center;
-    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
-#timer {
-    font-weight: bold;
-    font-size: 2rem;
+/* Broadcast Buttons Styling */
+.broadcast-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.broadcast-buttons button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
     color: white;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-/* Device Time Styling */
+.broadcast-buttons button:hover {
+    background-color: #666;
+}
+
+/* Footer Styling */
 footer {
     text-align: center;
     margin-top: 20px;
     color: white;
+    font-size: 0.9rem;
 }
