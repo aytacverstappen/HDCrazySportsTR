@@ -11,46 +11,44 @@
     <header>
         <div class="header-container">
             <h1>HDCrazySportsTR</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Ana Sayfa</a></li>
-                </ul>
-            </nav>
         </div>
     </header>
 
     <!-- Main Content Section -->
     <div class="container">
-        <div class="main-content">
-            <iframe id="video-player" 
-                    src="" 
-                    width="85%" 
-                    style="aspect-ratio: 16/9; min-height: 420px; display: none; margin-bottom: 10px;" 
-                    frameborder="0" 
-                    scrolling="no" 
-                    allow="autoplay" 
-                    allowfullscreen 
-                    webkitallowfullscreen 
-                    mozallowfullscreen 
-                    oallowfullscreen 
-                    msallowfullscreen>
-            </iframe>
-            <p id="broadcast-name">Türkçe MotoGP</p>
-            <!-- Broadcast Buttons -->
-            <div class="broadcast-buttons">
-                <button id="turkishMotoGP" onclick="changeBroadcast('Türkçe MotoGP', 'turkishMotoGP')">Türkçe MotoGP (16:00)</button>
-                <button id="englishMotoGP" onclick="changeBroadcast('English MotoGP', 'englishMotoGP')">English MotoGP (16:00)</button>
-                <button id="spanishMotoGP" onclick="changeBroadcast('Español MotoGP', 'spanishMotoGP')">Español MotoGP (16:00)</button>
-            </div>
+        <!-- Broadcast Buttons -->
+        <div class="broadcast-buttons">
+            <button id="turkishFormula1" onclick="changeBroadcast('Türkçe Formula 1', 'turkishFormula1', 'Eğer yayın değişmiyorsa, siteyi yenileyip tekrar deneyin.')">
+                Türkçe Formula 1 (22-24 Kasım)
+            </button>
+            <button id="englishFormula1" onclick="changeBroadcast('English Formula 1', 'englishFormula1', 'If the stream doesn’t change, please refresh the page and try again.')">
+                English Formula 1 (22-24 November)
+            </button>
+            <button id="spanishFormula1" onclick="changeBroadcast('Español Formula 1', 'spanishFormula1', 'Si la transmisión no cambia, actualice la página e intente nuevamente.')">
+                Español Formula 1 (22-24 de Noviembre)
+            </button>
         </div>
+
+        <!-- Broadcast Name -->
+        <p id="broadcast-name">Türkçe Formula 1</p>
+
+        <!-- Video Player -->
+        <iframe id="video-player"
+                src="https://mastercanlitv17.com/channel?id=yayinb4"
+                allowfullscreen
+                webkitallowfullscreen
+                mozallowfullscreen>
+        </iframe>
+
+        <!-- Warning Message -->
+        <p id="warning-text" class="warning-message">
+            Eğer yayın değişmiyorsa, siteyi yenileyip tekrar deneyin.
+        </p>
     </div>
 
     <!-- Footer Section -->
     <footer>
         <p>Device Time: <span id="device-time"></span></p>
-        <p style="color: #ffcc00; font-size: 1rem; margin-top: 10px;">
-            Eğer yayın seçme tuşlarına tıkladığınızda yayın değişmiyorsa, siteyi yenileyip yeniden yayın seçin.
-        </p>
     </footer>
 
     <script src="script.js"></script>
