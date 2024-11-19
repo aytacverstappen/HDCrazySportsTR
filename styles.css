@@ -60,13 +60,12 @@ header h1 {
 
 /* Iframe Styling */
 #video-player {
-    width: 60%; /* Biraz daha küçültüldü */
-    max-width: 1200px; /* Maksimum genişlik */
-    aspect-ratio: 16/9; /* 16:9 oranı */
+    width: 60%; /* Varsayılan genişlik */
+    max-width: 1200px;
+    height: 400px;
     display: block;
     border: 2px solid #ccc;
-    overflow: hidden; /* Taşmayı gizler */
-    height: calc(100% - 10px); /* Yüksekliği sınırlar */
+    overflow: hidden;
 }
 
 /* Warning Message Styling */
@@ -82,4 +81,21 @@ footer {
     margin-top: 20px;
     color: white;
     font-size: 1rem;
+}
+
+/* Responsive Styling for Mobile Devices */
+@media (max-width: 768px) {
+    #video-player {
+        width: 100%; /* Mobilde genişlik artırıldı */
+        height: 220px; /* Yükseklik ayarlandı */
+    }
+
+    #broadcast-name {
+        font-size: 1.2rem; /* Daha küçük yazı boyutu */
+    }
+
+    .broadcast-buttons button {
+        font-size: 0.9rem; /* Buton yazı boyutu küçültüldü */
+        padding: 8px 15px;
+    }
 }
