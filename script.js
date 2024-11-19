@@ -1,85 +1,83 @@
-/* General Body Styling */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #FF8C42;
-    color: white;
+// Yayın bilgileri
+const broadcasts = {
+    turkishFormula1: {
+        iframeSrc: 'https://mastercanlitv17.com/channel?id=yayinb4',
+    },
+    englishFormula1: {
+        iframeSrc: 'https://steamcommunity.com/broadcast/watch/76561198860535410',
+    },
+    spanishFormula1: {
+        iframeSrc: 'https://thedaddy.to/embed/stream-537.php',
+    },
+};
+
+// Yayın değiştir ve kaydırmayı sınırlama işlemini uygula
+function changeBroadcast(broadcastName, broadcastKey, warningMessage) {
+    const broadcastNameElement = document.getElementById('broadcast-name');
+    const videoPlayerElement = document.getElementById('video-player');
+    const warningTextElement = document.getElementById('warning-text');
+
+    broadcastNameElement.textContent = broadcastName;
+    videoPlayerElement.style.display = 'block';
+    videoPlayerElement.src = broadcasts[broadcastKey].iframeSrc;
+
+    // Uyarı metnini güncelle
+    warningTextElement.textContent = warningMessage;
+
+    // İngilizce yayın için kaydırmayı sınırla
+    if (broadcastKey === 'englishFormula1') {
+        limitIframeScrolling(videoPlayerElement);
+    }
+
+    // İframe alanına kaydır
+    videoPlayerElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
-/* Header Styling */
-header {
-    background-color: #333;
-    color: white;
-    padding: 15px 20px;
-    text-align: center;
+// İngilizce iframe'de kaydırmayı sınırla
+function limitIframeScrolling(iframe) {
+    iframe.addEventListener("load", () => {
+        try {
+            const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+            iframeDocument.body.style.overflow = "hidden"; // Scroll'u tamamen devre dışı bırak
+        } catch (error) {
+            console.error("Scroll'u devre dışı bırakma işlemi başarısız:", error);
+        }
+    });
 }
 
-header h1 {
-    font-size: 1.8rem;
-    margin: 0;
+// İngilizce yayın için unmute işlemi
+function handleEnglishStream() {
+    const iframe = document.getElementById('video-player');
+    const iframeWindow = iframe.contentWindow;
+
+    try {
+        const unmuteButton = iframeWindow.document.querySelector('.unmute-button-class'); // Unmute butonu class'ı
+        if (unmuteButton) {
+            unmuteButton.click();
+
+            // Pop-up sekmesini kapat
+            const popup = iframeWindow.open('', '_blank');
+            if (popup) {
+                popup.close();
+            }
+        }
+    } catch (error) {
+        console.error("Unmute işlemi başarısız:", error);
+    }
 }
 
-/* Main Content Styling */
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    gap: 20px;
+// Cihaz saatini güncelle
+function updateDeviceTime() {
+    const deviceTimeElement = document.getElementById('device-time');
+    const now = new Date();
+    const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+
+    deviceTimeElement.textContent = now.toLocaleTimeString(undefined, options);
 }
 
-/* Broadcast Buttons Styling */
-.broadcast-buttons {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.broadcast-buttons button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #444;
-    color: white;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.broadcast-buttons button:hover {
-    background-color: #666;
-}
-
-/* Broadcast Name Styling */
-#broadcast-name {
-    font-size: 1.4rem;
-    text-align: center;
-}
-
-/* Iframe Styling */
-#video-player {
-    width: 60%; /* Biraz daha küçültüldü */
-    max-width: 1200px; /* Maksimum genişlik */
-    aspect-ratio: 16/9; /* 16:9 oranı */
-    display: block;
-    border: 2px solid #ccc;
-    overflow: hidden; /* Taşmayı gizler */
-    height: calc(100% - 10px); /* Yüksekliği sınırlar */
-}
-
-/* Warning Message Styling */
-.warning-message {
-    font-size: 1rem;
-    color: #ffcc00;
-    text-align: center;
-}
-
-/* Footer Styling */
-footer {
-    text-align: center;
-    margin-top: 20px;
-    color: white;
-    font-size: 1rem;
-}
+// Sayfa yüklendiğinde ayarları başlat
+document.addEventListener('DOMContentLoaded', () => {
+    updateDeviceTime();
+    setInterval(updateDeviceTime, 1000);
+    changeBroadcast('Türkçe Formula 1', 'turkishFormula1', 'Eğer yayın değişmiyorsa, siteyi yenileyip tekrar deneyin.');
+});
