@@ -11,7 +11,7 @@ const broadcasts = {
     },
 };
 
-// Yayın değiştir ve kaydırmayı sınırlama işlemini uygula
+// Yayın değiştir ve sayfayı kaydır
 function changeBroadcast(broadcastName, broadcastKey, warningMessage) {
     const broadcastNameElement = document.getElementById('broadcast-name');
     const videoPlayerElement = document.getElementById('video-player');
@@ -24,25 +24,13 @@ function changeBroadcast(broadcastName, broadcastKey, warningMessage) {
     // Uyarı metnini güncelle
     warningTextElement.textContent = warningMessage;
 
-    // İngilizce yayın için kaydırmayı sınırla
+    // İngilizce yayın için unmute işlemi
     if (broadcastKey === 'englishFormula1') {
-        limitIframeScrolling(videoPlayerElement);
+        setTimeout(() => handleEnglishStream(), 3000); // 3 saniye bekleme
     }
 
     // İframe alanına kaydır
     videoPlayerElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// İngilizce iframe'de kaydırmayı sınırla
-function limitIframeScrolling(iframe) {
-    iframe.addEventListener("load", () => {
-        try {
-            const iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
-            iframeDocument.body.style.overflow = "hidden"; // Scroll'u tamamen devre dışı bırak
-        } catch (error) {
-            console.error("Scroll'u devre dışı bırakma işlemi başarısız:", error);
-        }
-    });
 }
 
 // İngilizce yayın için unmute işlemi
@@ -79,5 +67,6 @@ function updateDeviceTime() {
 document.addEventListener('DOMContentLoaded', () => {
     updateDeviceTime();
     setInterval(updateDeviceTime, 1000);
-    changeBroadcast('Türkçe Formula 1', 'turkishFormula1', 'Eğer yayın değişmiyorsa, siteyi yenileyip tekrar deneyin.');
+    // İngilizce Formula 1 yayını ilk açıldığında gösterilecek
+    changeBroadcast('English Formula 1', 'englishFormula1', 'If the stream doesn’t change, please refresh the page and try again.');
 });
