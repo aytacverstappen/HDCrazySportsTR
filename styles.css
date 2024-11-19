@@ -3,52 +3,21 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #FF8C42; /* Dark Orange */
+    background-color: #FF8C42;
     color: white;
 }
 
 /* Header Styling */
 header {
-    background-color: #333; /* Dark Header Background */
+    background-color: #333;
     color: white;
     padding: 15px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-}
-
-.header-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+    text-align: center;
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin: 0;
-}
-
-header nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    gap: 15px;
-}
-
-header nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
-    padding: 5px 10px;
-    transition: background-color 0.3s ease;
-}
-
-header nav ul li a:hover {
-    background-color: #555;
-    border-radius: 3px;
 }
 
 /* Main Content Styling */
@@ -56,39 +25,25 @@ header nav ul li a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
     padding: 15px;
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-#broadcast-name {
-    font-size: 1.4rem;
-    text-align: center;
-    color: white;
-    margin-bottom: 5px;
+    gap: 20px;
 }
 
 /* Broadcast Buttons Styling */
 .broadcast-buttons {
     display: flex;
-    gap: 8px;
+    gap: 10px;
     justify-content: center;
     flex-wrap: wrap;
 }
 
 .broadcast-buttons button {
-    padding: 8px 15px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
     background-color: #444;
     color: white;
-    font-size: 0.9rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
@@ -97,10 +52,34 @@ header nav ul li a:hover {
     background-color: #666;
 }
 
+/* Broadcast Name Styling */
+#broadcast-name {
+    font-size: 1.4rem;
+    text-align: center;
+}
+
+/* Iframe Styling */
+#video-player {
+    width: 60%; /* Biraz daha küçültüldü */
+    max-width: 1200px; /* Maksimum genişlik */
+    aspect-ratio: 16/9; /* 16:9 oranı */
+    display: block;
+    border: 2px solid #ccc;
+    overflow: hidden; /* Taşmayı gizler */
+    height: calc(100% - 10px); /* Yüksekliği sınırlar */
+}
+
+/* Warning Message Styling */
+.warning-message {
+    font-size: 1rem;
+    color: #ffcc00;
+    text-align: center;
+}
+
 /* Footer Styling */
 footer {
     text-align: center;
     margin-top: 20px;
     color: white;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
