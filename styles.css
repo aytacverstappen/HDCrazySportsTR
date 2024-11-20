@@ -38,6 +38,9 @@ header h1 {
 }
 
 .broadcast-buttons button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -46,6 +49,12 @@ header h1 {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.broadcast-buttons button img {
+    width: 24px;
+    height: 16px;
+    border-radius: 2px;
 }
 
 .broadcast-buttons button:hover {
@@ -87,7 +96,7 @@ footer {
 @media (max-width: 768px) {
     #video-player {
         width: 100%; /* Mobilde genişlik artırıldı */
-        height: 450px; /* Yükseklik ayarlandı */
+        height: 220px; /* Yükseklik ayarlandı */
     }
 
     #broadcast-name {
