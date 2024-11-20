@@ -7,7 +7,7 @@ const broadcasts = {
         iframeSrc: 'https://steamcommunity.com/broadcast/watch/76561198860535410',
     },
     spanishFormula1: {
-        iframeSrc: 'https://thedaddy.to/embed/stream-537.php',
+        iframeSrc: 'https://mazespin.live/channel/stream?id=f1esp&server=patis',
     },
 };
 
