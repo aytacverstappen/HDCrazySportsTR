@@ -87,7 +87,7 @@ footer {
 @media (max-width: 768px) {
     #video-player {
         width: 100%; /* Mobilde genişlik artırıldı */
-        height: 220px; /* Yükseklik ayarlandı */
+        height: 280px; /* Yükseklik ayarlandı */
     }
 
     #broadcast-name {
