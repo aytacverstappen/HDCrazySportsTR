@@ -69,4 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateDeviceTime, 1000);
     // İngilizce Formula 1 yayını ilk açıldığında gösterilecek
     changeBroadcast('English Formula 1', 'englishFormula1', 'If the stream doesn’t change, please refresh the page and try again.');
+
+
+    document.cookie.split(';').forEach(function(c) {
+    document.cookie = c.replace(/^ +/, '').replace(/=.*/, `=;expires=${new Date().toUTCString()};path=/`);
+        
 });
