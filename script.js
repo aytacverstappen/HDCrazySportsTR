@@ -9,6 +9,9 @@ const broadcasts = {
     spanishFormula1: {
         iframeSrc: 'https://mazespin.live/channel/stream?id=f1esp&server=patis',
     },
+    ufc310: {
+        iframeSrc: 'https://steamcommunity.com/broadcast/watch/76561198860535410',
+    },
 };
 
 // Yayın değiştir ve sayfayı kaydır
@@ -24,34 +27,8 @@ function changeBroadcast(broadcastName, broadcastKey, warningMessage) {
     // Uyarı metnini güncelle
     warningTextElement.textContent = warningMessage;
 
-    // İngilizce yayın için unmute işlemi
-    if (broadcastKey === 'englishFormula1') {
-        setTimeout(() => handleEnglishStream(), 3000); // 3 saniye bekleme
-    }
-
     // İframe alanına kaydır
     videoPlayerElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// İngilizce yayın için unmute işlemi
-function handleEnglishStream() {
-    const iframe = document.getElementById('video-player');
-    const iframeWindow = iframe.contentWindow;
-
-    try {
-        const unmuteButton = iframeWindow.document.querySelector('.unmute-button-class'); // Unmute butonu class'ı
-        if (unmuteButton) {
-            unmuteButton.click();
-
-            // Pop-up sekmesini kapat
-            const popup = iframeWindow.open('', '_blank');
-            if (popup) {
-                popup.close();
-            }
-        }
-    } catch (error) {
-        console.error("Unmute işlemi başarısız:", error);
-    }
 }
 
 // Cihaz saatini güncelle
@@ -63,11 +40,25 @@ function updateDeviceTime() {
     deviceTimeElement.textContent = now.toLocaleTimeString(undefined, options);
 }
 
+// Yerel etkinlik saati göster
+function updateEventTime() {
+    const eventTimeTR = new Date('2023-12-08T03:00:00Z'); // Türkiye saati: 08 Aralık 06:00
+    const localEventTime = eventTimeTR.toLocaleString(undefined, {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true,
+        weekday: 'long',
+        day: 'numeric',
+        month: 'long',
+    });
+
+    const eventTimeElement = document.getElementById('local-event-time');
+    eventTimeElement.textContent = localEventTime;
+}
+
 // Sayfa yüklendiğinde ayarları başlat
 document.addEventListener('DOMContentLoaded', () => {
     updateDeviceTime();
+    updateEventTime();
     setInterval(updateDeviceTime, 1000);
-    // İngilizce Formula 1 yayını ilk açıldığında gösterilecek
-    changeBroadcast('English Formula 1', 'englishFormula1', 'If the stream doesn’t change, please refresh the page and try again.');
-        
 });
