@@ -61,4 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateDeviceTime();
     updateEventTime();
     setInterval(updateDeviceTime, 1000);
+
+    // Sayfa açıldığında English Formula 1 yayını göster
+    changeBroadcast('English Formula 1', 'englishFormula1', 'If the stream doesn’t change, please refresh the page and try again.');
 });
