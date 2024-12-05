@@ -62,7 +62,7 @@ header h1 {
 #video-player {
     width: 60%;
     max-width: 1200px;
-    height: 600px;
+    height: 500px;
     display: block;
     border: 2px solid #ccc;
     overflow: hidden;
